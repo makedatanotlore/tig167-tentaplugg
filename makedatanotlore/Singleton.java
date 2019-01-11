@@ -6,6 +6,9 @@ public class Singleton{
     public static Singleton instance(){
         System.out.println("Singleton.instance(): START");
         System.out.println("- returning instance");
-        return instance != null ? instance : new Singleton();
+        if(instance == null){
+            instance = new Singleton();
+        }
+        return instance;
     }
 }

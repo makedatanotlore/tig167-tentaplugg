@@ -43,7 +43,7 @@ public class Makedatanotlore{
         System.out.println("---------");
 
 
-        System.out.println("--- Testing Lambda ---");
+        System.out.println("--- Testing Streams & Lambdas ---");
         System.out.println("--- list of unsorted items ---");
         List<String> list = new ArrayList<>();
         list.add("mammy bammy");
@@ -55,7 +55,15 @@ public class Makedatanotlore{
         Collections.sort(list, StreamsAndLambdas.stringLengthComparator());
         System.out.println("--- list of sorted items ---");
         list.forEach(System.out::println);
-        System.out.println("--- Lambdas: OK ---");
+
+        double avg = StreamsAndLambdas.averageLength(list);
+        System.out.println("- average length of list items: " + avg);
+        assert avg == 6.75 : "- expected: 6.75, got: " + avg;
+        System.out.println("--- Streams & Lambdas: OK ---");
+        System.out.println("---------");
+
+        System.out.println("--- Testing Enums ---");
+        Enums.printNumber(12, Enums.Base.HEX);
         System.out.println("---------");
 
 

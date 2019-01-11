@@ -24,16 +24,22 @@ public class Main{
 
         System.out.println("=== PATH ===");
 
-        // current directory of this file
-        Path currentRelativeDir = Paths.get("");
+
+
+
+
+        // current directory of where you compile and run this file
+        Path currentRelativeDir = Paths.get("addibro");
+        System.out.println(currentRelativeDir.toString());
+
         // chained dirs
-        Path foobartest = Paths.get("foo/bar/test");
+        Path foobartest = Paths.get("addibro/foo/bar/test");
         
         // one dir
-        Path test = Paths.get("test");
+        Path test = Paths.get("addibro/test");
         
         // file
-        Path testtxt = Paths.get("file1.txt");
+        Path testtxt = Paths.get("addibro/file1.txt");
 
         // this file
         Path main = Paths.get("addibro/Main.java");
@@ -46,11 +52,14 @@ public class Main{
         Path dirs = Files.createDirectories(foobartest); // will not throw exception if dirs already exist
 
         // output all files/dirs in currentRelativeDir
-        try (DirectoryStream<Path> files = Files.newDirectoryStream(currentRelativeDir, "*.sh")) {
-            files.forEach(System.out::println);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+        // try (DirectoryStream<Path> files = Files.newDirectoryStream(currentRelativeDir, "*.sh")) {
+            // files.forEach(System.out::println);
+        // } catch (IOException ex) {
+            // System.out.println(ex);
+        // }
+
+        Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
+
 
         // output the content of this file
         String content = new String(Files.readAllBytes(main), StandardCharsets.UTF_8);
@@ -61,7 +70,7 @@ public class Main{
             // System.out.println(line);
         // }
 
-        Path file1 = Paths.get("file1.txt");
+        Path file1 = Paths.get("addibro/file1.txt");
         // write something to the file
         List<String> lines = new ArrayList<>();
         lines.add("new line");
@@ -69,6 +78,6 @@ public class Main{
         Files.write(file1, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND); // append to end of file1
 
         // copy source: file1 to target: file2
-        Files.copy(file1, Paths.get("file2.txt"));
+        Files.copy(file1, Paths.get("addibro/file2.txt"));
     }
 }

@@ -8,7 +8,9 @@ public class StreamsAndLambdas{
     public static double averageLength(List<String> strings){
         System.out.println("StreamsAndLambdas.averageLength(): START");
         if (strings == null || strings.isEmpty()){
-            System.out.println("- List supplied was null or empty\n- Returning 0.0");
+            System.out.println("- List supplied was null or empty");
+            System.out.println("- Returning 0.0");
+
             return 0;
         }
         System.out.println("- List supplied was OK");

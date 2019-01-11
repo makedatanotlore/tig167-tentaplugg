@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 
 public class StreamsAndLambdas{
+    public static Comparator<String> stringLengthComparator(){
+        return (s1, s2) -> s1.length() - s2.length();
+    }
     public static double averageLength(List<String> strings){
         System.out.println("StreamsAndLambdas.averageLength(): START");
         if (strings == null || strings.isEmpty()){

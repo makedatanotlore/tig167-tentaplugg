@@ -1,4 +1,8 @@
 import makedatanotlore.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Makedatanotlore{
     public static void main(String[] args) {
@@ -23,5 +27,37 @@ public class Makedatanotlore{
 
         System.out.println("--- Builder: OK ---");
         System.out.println("---------");
+        System.out.println("--- Testing IO ---");
+        System.out.println("--- listing files ending with specified string ---");
+        try{
+            IO.listFiles(".sh");
+        } catch(IOException ioe){
+            System.out.println("ERROR: IOException when listing files");
+        }
+        System.out.println("--- IO: OK ---");
+        System.out.println("---------");
+
+        System.out.println("--- Testing Time ---");
+        System.out.println(Time.daysUntilChristmas());
+        System.out.println("--- Time: OK ---");
+        System.out.println("---------");
+
+
+        System.out.println("--- Testing Lambda ---");
+        System.out.println("--- list of unsorted items ---");
+        List<String> list = new ArrayList<>();
+        list.add("mammy bammy");
+        list.add("mammy");
+        list.add("wammy");
+        list.add("saaaaa");
+        list.forEach(System.out::println);
+
+        Collections.sort(list, StreamsAndLambdas.stringLengthComparator());
+        System.out.println("--- list of sorted items ---");
+        list.forEach(System.out::println);
+        System.out.println("--- Lambdas: OK ---");
+        System.out.println("---------");
+
+
     }
 }

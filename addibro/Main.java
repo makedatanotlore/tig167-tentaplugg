@@ -25,12 +25,8 @@ public class Main{
         System.out.println("=== PATH ===");
 
 
-
-
-
         // current directory of where you compile and run this file
         Path currentRelativeDir = Paths.get("addibro");
-        System.out.println(currentRelativeDir.toString());
 
         // chained dirs
         Path foobartest = Paths.get("addibro/foo/bar/test");
@@ -58,12 +54,13 @@ public class Main{
             // System.out.println(ex);
         // }
 
-        Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
+        // Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
+        ListFiles.listFiles(currentRelativeDir, "sh");
 
 
         // output the content of this file
         String content = new String(Files.readAllBytes(main), StandardCharsets.UTF_8);
-        System.out.println(content);
+        // System.out.println(content);
 
         // output the content of this file line by line
         // for (String line : Files.readAllLines(path)) {
@@ -77,7 +74,11 @@ public class Main{
         lines.add("another line");
         Files.write(file1, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND); // append to end of file1
 
+        Files.delete(Paths.get("addibro/file2.txt"));
+
         // copy source: file1 to target: file2
         Files.copy(file1, Paths.get("addibro/file2.txt"));
+
+        Timez.dagarTillJulafton();
     }
 }

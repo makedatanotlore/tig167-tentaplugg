@@ -2,3 +2,20 @@ new line
 another line
 new line
 another line
+<<<<<<< HEAD
+=======
+new line
+another line
+new line
+another line
+new line
+another line
+new line
+another line
+new line
+another line
+new line
+another line
+new line
+another line
+>>>>>>> 943a7112e80a39fdc81baa9b92b61f420a895c62

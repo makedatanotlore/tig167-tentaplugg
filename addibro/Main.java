@@ -54,7 +54,8 @@ public class Main{
             // System.out.println(ex);
         // }
 
-        Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
+        // Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
+        ListFiles.listFiles(currentRelativeDir, "sh");
 
 
         // output the content of this file
@@ -77,5 +78,7 @@ public class Main{
 
         // copy source: file1 to target: file2
         Files.copy(file1, Paths.get("addibro/file2.txt"));
+
+        Timez.dagarTillJulafton();
     }
 }

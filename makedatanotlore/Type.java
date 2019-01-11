@@ -1,0 +1,7 @@
+/**
+ * Type
+ */
+public interface Type {
+
+    
+}

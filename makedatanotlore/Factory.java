@@ -3,12 +3,12 @@
  */
 public class Factory {
 
-    public static Factory getFactory(Fac fac) {
+    public static Type getFactory(Fac fac) {
         switch (fac) {
             case BITCH:
-                return new BitchFactory();
+                return new BitchType();
             case BLYAT:
-                return new BlyatFactory();
+                return new BlyatType();
             default:
                 return null;
         }

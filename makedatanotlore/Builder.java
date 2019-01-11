@@ -17,7 +17,7 @@ public class Builder {
         return street;
     }
 
-    public Builder(String name, String city, String street) {
+    private Builder(String name, String city, String street) {
     this.name = name;
     this.city = city;
     this.street = street;

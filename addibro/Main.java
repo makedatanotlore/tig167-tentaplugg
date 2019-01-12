@@ -2,6 +2,7 @@ package addibro;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +81,7 @@ public class Main{
         Files.copy(file1, Paths.get("addibro/file2.txt"));
 
         Timez.dagarTillJulafton();
+        
+        DaysToDate.calculate(Month.MAY, 18);
     }
 }

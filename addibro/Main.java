@@ -3,9 +3,14 @@ package addibro;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Month;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Map;
+import java.util.TreeSet;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +28,7 @@ public class Main{
 
         System.out.println(ctb);
 
-        System.out.println("=== PATH ===");
+        System.out.println("\n=== PATH ===");
 
 
         // current directory of where you compile and run this file
@@ -80,8 +85,56 @@ public class Main{
         // copy source: file1 to target: file2
         Files.copy(file1, Paths.get("addibro/file2.txt"));
 
+
+        System.out.println("\n=== LocalDate ===");
         Timez.dagarTillJulafton();
         
         DaysToDate.calculate(Month.MAY, 18);
+
+
+        System.out.println("\n=== Collection ===");
+        Collection<String> arrayList = new ArrayList<>();
+        arrayList.add("first");
+        arrayList.add("second");
+        arrayList.add("third");
+
+        Collection<String> linkedList = new LinkedList<>();
+        ((LinkedList) linkedList).addFirst("first");
+        ((LinkedList) linkedList).addFirst("second");
+        ((LinkedList) linkedList).addFirst("third");
+
+        Collection<String> hashSet = new HashSet<>();
+        hashSet.add("hello");
+        hashSet.add("world");
+        hashSet.add("hello");
+        hashSet.add("world");
+        hashSet.add("what's");
+        hashSet.add("up");
+
+        Collection<String> treeSet = new TreeSet<>();
+        treeSet.add("hello");
+        treeSet.add("world");
+        treeSet.add("hello");
+        treeSet.add("world");
+        treeSet.add("what's");
+        treeSet.add("up");
+
+        // arraylist simply adds elements to the beginning of the list
+        new Collectionz().printCollection(arrayList);
+        // with a linkedlist you can add elements to the end and beginning of the list
+        new Collectionz().printCollection(linkedList);
+        // a hashset will not sort the unique elements 
+        new Collectionz().printCollection(hashSet);
+        // treeSet will sort on natural order
+        new Collectionz().printCollection(treeSet);
+
+        Map<Integer, String> leaderBoard = new HashMap<>();
+        leaderBoard.put(1, "Andreas");
+        leaderBoard.put(2, "Andreas");
+        leaderBoard.put(3, "Andreas");
+        leaderBoard.put(4, "Andreas");
+        leaderBoard.put(5, "Andreas");
+
+        System.out.println(leaderBoard);
     }
 }

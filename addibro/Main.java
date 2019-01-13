@@ -136,5 +136,12 @@ public class Main{
         leaderBoard.put(5, "Andreas");
 
         System.out.println(leaderBoard);
+
+
+        System.out.println("\n=== Enum and binary ===");
+
+        NumberUtils.printNumber(15, Base.HEX);
+        // 15 in decimal is 1111 in binary
+        // octal takes three bits 
     }
 }

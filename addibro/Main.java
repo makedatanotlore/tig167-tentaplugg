@@ -145,6 +145,8 @@ public class Main{
         // 15 in decimal is 1111 in binary
         // octal takes three bits 
 
+        System.out.println("\n=== Class loading ===");
+        ObjectLoader obl = new ObjectLoader("name", 1, new int[]{});
 
 
         System.out.println("\n=== Streams ===");

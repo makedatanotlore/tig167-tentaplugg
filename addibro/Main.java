@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -143,5 +144,50 @@ public class Main{
         NumberUtils.printNumber(15, Base.HEX);
         // 15 in decimal is 1111 in binary
         // octal takes three bits 
+
+
+
+        System.out.println("\n=== Streams ===");
+        List<Person> persons = new ArrayList<>();
+        persons.add(new Person("David", 14));
+        persons.add(new Person("Mats", 68));
+        persons.add(new Person("Maggan", 4));
+        persons.add(new Person("Ludvig", 24));
+        persons.add(new Person("Andre", 24));
+        persons.add(new Person("Mormor", 88));
+        persons.add(new Person("Anna", 58));
+        persons.add(new Person("Jesper", 38));
+        persons.add(new Person("Håkan", 17));
+
+        IntStream.range(1, 5)
+            .forEach(i -> persons.add(new Person("Person-" + i, i)));;
+
+        persons.forEach(p -> IntStream.range(1, 5)
+            .forEach(i -> p.addThing(new Thing("shit-" + i))));
+
+        persons.stream()
+            .flatMap(p -> p.getThings().stream())
+            .forEach(System.out::println);
+
+
+        // IntStream.range(1, 5)
+        //     .mapToObj(i -> new Person("Person-", i))
+        //     .peek(p -> IntStream.range(1, 5)
+        //         .mapToObj(i -> new Thing("thing-" + i))
+        //         .forEach(t -> p.addThing(t)))
+        //     .flatMap(p -> p.getThings().stream())
+        //     .forEach(t -> System.out.println("Thing: " + t));
+
+        double averageAge = Streamz.averageAge(persons);
+        averageAge = Streamz.averageAge2(persons);
+
+        System.out.println("Average age: " + averageAge);
+
+        // Streamz.printPersonAge(persons);
+
+        Map<Integer, List<Person>> personByAge = Streamz.groupByAge(persons);
+        System.out.println(personByAge);
+        
+        System.out.println(Streamz.legalAgePhrase(persons));
     }
 }

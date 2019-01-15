@@ -11,7 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -19,9 +22,15 @@ import java.nio.file.*;
 
 public class Main{
     public static void main(String[] args) throws IOException {
-        Type factory = Factory.getFactory(Factory.Fac.BITCH);
 
-        System.out.println("=== BUILDER ===");
+        System.out.println("=== Factory ===");
+        Type type = Factory.getFactory(Factory.Fac.BITCH); // simple factory
+        TypeFactory btf = new BitchTypeFactory(); // factory method
+        TypeFactory blyattf = new BlyatTypeFactory();
+        Type bitch = btf.createType();
+        Type blyat = blyattf.createType();
+
+        System.out.println("\n=== BUILDER ===");
         ClassToBuild ctb = new ClassToBuild.Builder().with(b -> {
             b.field = "Hello";
             b.field2 = 12;
@@ -32,27 +41,55 @@ public class Main{
         System.out.println("\n=== PATH ===");
 
 
+        
+        List<String> stringPaths = new ArrayList<>();
         // current directory of where you compile and run this file
         Path currentRelativeDir = Paths.get("addibro");
-
+        stringPaths.add(currentRelativeDir.toString());
+        
         // chained dirs
         Path foobartest = Paths.get("addibro/foo/bar/test");
+        stringPaths.add("foobartest");
         
         // one dir
         Path test = Paths.get("addibro/test");
+        stringPaths.add("test");
+        
+        Path siblingToTest = test.resolveSibling("test-sibling");
+        stringPaths.add("siblingToTest");
         
         // file
-        Path testtxt = Paths.get("addibro/file1.txt");
-
+        Path file1 = Paths.get("addibro/file1.txt");
+        stringPaths.add("file1");
+        
         // this file
         Path main = Paths.get("addibro/Main.java");
+        stringPaths.add("main");
         
-        if (!test.toFile().exists() && !testtxt.toFile().exists()) { 
-            Path file = Files.createFile(testtxt); // will throw exception if dir already exists
-            Path dir = Files.createDirectory(test); // will throw exception if dir already exists
-        }
         
+        Map<String, Path> paths = stringPaths.stream()
+            .collect(Collectors.toMap(p -> p, p -> Paths.get(p)));
+
         Path dirs = Files.createDirectories(foobartest); // will not throw exception if dirs already exist
+
+        paths.values().stream()
+        .filter(p -> !p.toFile().exists()) // will throw exception if dir already exists
+        .forEach(p -> {
+            try {
+                if (p.toFile().isDirectory()) 
+                Files.createDirectory(p); 
+                else
+                Files.createFile(p);
+                
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
+        });        
+        
+        Files.list(currentRelativeDir).forEach(System.out::println);
+        BufferedReader br =  Files.newBufferedReader(main);
+        Stream<String> mainLines = br.lines();
+
 
         // output all files/dirs in currentRelativeDir
         // try (DirectoryStream<Path> files = Files.newDirectoryStream(currentRelativeDir, "*.sh")) {
@@ -62,19 +99,14 @@ public class Main{
         // }
 
         // Files.newDirectoryStream(currentRelativeDir, "*.sh").forEach(System.out::println);
-        ListFiles.listFiles(currentRelativeDir, "sh");
-
+        // ListFiles.listFiles(currentRelativeDir, "sh");
+        
+        // TryWithResources.printFiles(Paths.get("addibro"));
 
         // output the content of this file
         String content = new String(Files.readAllBytes(main), StandardCharsets.UTF_8);
         // System.out.println(content);
 
-        // output the content of this file line by line
-        // for (String line : Files.readAllLines(path)) {
-            // System.out.println(line);
-        // }
-
-        Path file1 = Paths.get("addibro/file1.txt");
         // write something to the file
         List<String> lines = new ArrayList<>();
         lines.add("new line");
@@ -130,18 +162,15 @@ public class Main{
         new Collectionz().printCollection(treeSet);
 
         Map<Integer, String> leaderBoard = new HashMap<>();
-        leaderBoard.put(1, "Andreas");
-        leaderBoard.put(2, "Andreas");
-        leaderBoard.put(3, "Andreas");
-        leaderBoard.put(4, "Andreas");
-        leaderBoard.put(5, "Andreas");
-
+        IntStream.range(1, 5)
+            .forEach(i -> leaderBoard.put(i, "string-" + NumberUtils.printNumber(i, Base.BINARY)));;
         System.out.println(leaderBoard);
 
 
         System.out.println("\n=== Enum and binary ===");
 
-        NumberUtils.printNumber(15, Base.HEX);
+        String base = NumberUtils.printNumber(15, Base.BINARY);
+        System.out.println(base);
         // 15 in decimal is 1111 in binary
         // octal takes three bits 
 
@@ -151,7 +180,7 @@ public class Main{
 
         System.out.println("\n=== Streams ===");
         List<Person> persons = new ArrayList<>();
-        persons.add(new Person("David", 14));
+        persons.add(new Person("David", 14, "lillkuken@gmail.com"));
         persons.add(new Person("Mats", 68));
         persons.add(new Person("Maggan", 4));
         persons.add(new Person("Ludvig", 24));
@@ -165,11 +194,11 @@ public class Main{
             .forEach(i -> persons.add(new Person("Person-" + i, i)));;
 
         persons.forEach(p -> IntStream.range(1, 5)
-            .forEach(i -> p.addThing(new Thing("shit-" + i))));
+            .forEach(i -> p.addThing(new Thing("thing-" + i))));
 
-        persons.stream()
-            .flatMap(p -> p.getThings().stream())
-            .forEach(System.out::println);
+        // persons.stream()
+            // .flatMap(p -> p.getThings().stream())
+            // .forEach(System.out::println);
 
 
         // IntStream.range(1, 5)

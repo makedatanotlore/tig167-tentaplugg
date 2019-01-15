@@ -13,9 +13,13 @@ public class ObjectLoader extends Loader {
         System.out.println("static block in ObjectLoader");
     }
 
+    {
+        System.out.println("instance initializer block in ObjectLoader");
+    }
+
     public ObjectLoader(String name, int n, Object obj) {
         super(name, n);
-        System.out.println("back from super() in ObjectLoader constructor");
+        System.out.println("ObjectLoader constructor");
         this.obj = obj;
     }
 }
@@ -29,6 +33,11 @@ class Loader {
 
     static {
         System.out.println("static block in Loader");
+    }
+
+
+    {
+        System.out.println("instance initializer block in Loader");
     }
 
     public Loader(String name, int n) {

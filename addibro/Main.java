@@ -40,8 +40,6 @@ public class Main{
 
         System.out.println("\n=== PATH ===");
 
-
-        
         List<String> stringPaths = new ArrayList<>();
         // current directory of where you compile and run this file
         Path currentRelativeDir = Paths.get("addibro");
@@ -168,6 +166,8 @@ public class Main{
 
 
         System.out.println("\n=== Enum and binary ===");
+
+        Repeat.THREE.times(System.out::println, "Repeating");
 
         String base = NumberUtils.printNumber(15, Base.BINARY);
         System.out.println(base);
